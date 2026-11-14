@@ -215,3 +215,37 @@ def test_missing_source_file_fails_loudly(warehouse, tmp_path):
     result = service.run_ingestion(warehouse, tmp_path / "does_not_exist.csv")
     assert result["status"] == "failed"
     assert "FileNotFoundError" in result["failure_reason"]
+
+def test_boundary_zero_amount_is_rejected(warehouse, tmp_path):
+    """Boundary: amount must be strictly greater than zero."""
+    result = run_batch(warehouse, tmp_path, "zero_amount", [
+        ["upsert", "O1", "C001", "0", "new", "2026-11-01T09:00:00Z"],
+    ])
+    assert result["rejects_by_reason"] == {"invalid_amount": 1}
+
+
+def test_boundary_large_amount_is_accepted(warehouse, tmp_path):
+    """Boundary: a large but valid amount must pass unchanged."""
+    result = run_batch(warehouse, tmp_path, "large_amount", [
+        ["upsert", "O1", "C001", "999999.99", "paid", "2026-11-01T09:00:00Z"],
+    ])
+    assert result["applied_rows"] == 1
+    overview = service.get_overview(warehouse)
+    assert {r["order_id"]: r for r in overview["target_orders"]}["O1"]["amount"] == 999999.99
+
+
+def test_boundary_equal_timestamp_is_not_reapplied(warehouse, tmp_path):
+    """Boundary: an event exactly equal to the stored timestamp is not newer,
+    so it must be skipped rather than applied twice."""
+    run_batch(warehouse, tmp_path, "boundary_a", [
+        ["upsert", "O1", "C001", "10.00", "new", "2026-11-01T09:00:00Z"],
+    ])
+    same_instant = run_batch(warehouse, tmp_path, "boundary_b", [
+        ["upsert", "O1", "C001", "99.00", "paid", "2026-11-01T09:00:00Z"],
+    ])
+    assert same_instant["stale_skipped_rows"] == 1
+    assert same_instant["applied_rows"] == 0
+    overview = service.get_overview(warehouse)
+    target = {r["order_id"]: r for r in overview["target_orders"]}["O1"]
+    assert target["amount"] == 10.0          # original value survives
+    assert target["status"] == "new"
