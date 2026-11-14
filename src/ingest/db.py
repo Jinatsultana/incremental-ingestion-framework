@@ -1,4 +1,4 @@
-"""DATA TIER.
+﻿"""DATA TIER.
 
 The only module in the project that knows SQL exists. Everything above this
 layer (pipeline, service, CLI, UI) talks to plain Python dicts and lists.
@@ -310,8 +310,13 @@ def rejects_by_reason(conn: sqlite3.Connection, run_id: str) -> dict[str, int]:
 
 
 def recent_runs(conn: sqlite3.Connection, limit: int = 20) -> list[dict[str, Any]]:
+    """Most recently written runs first.
+
+    rowid DESC breaks ties when several runs start within the same second, so
+    "latest" always means the run that was actually written last.
+    """
     rows = conn.execute(
-        "SELECT * FROM run_history ORDER BY started_at DESC LIMIT ?", (limit,)
+        "SELECT * FROM run_history ORDER BY started_at DESC, rowid DESC LIMIT ?", (limit,)
     ).fetchall()
     return [dict(r) for r in rows]
 
@@ -321,6 +326,7 @@ def current_target_rows(conn: sqlite3.Connection, limit: int = 500) -> list[dict
         "SELECT * FROM target_orders ORDER BY order_id LIMIT ?", (limit,)
     ).fetchall()
     return [dict(r) for r in rows]
+
 
 # ---------------------------------------------------------------------------
 # Reference data & run artefact lifecycle
