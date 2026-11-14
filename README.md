@@ -21,7 +21,7 @@ failure without duplicating target data**. Python standard library + SQLite, in 
 
 Dashboard: `python -m streamlit run ui/app.py`
 Validation report: `python -m ingest.report`
-Tests: `python -m pytest -q` (27 passing)
+Tests: `python -m pytest -q` (30 passing)
 
 ## One-command demo
 
@@ -79,7 +79,7 @@ Asserted against run_history and re-counted from the persisted quarantine rows b
 `python -m ingest.cli reconcile --latest`, and rendered as PASS/FAIL verdicts in
 `python -m ingest.report`.
 
-## Test suite (27 tests)
+## Test suite (30 tests)
 
 Pipeline behaviour: happy path, empty batch, nulls, malformed row, unexpected schema change,
 duplicate event, invalid reference key, invalid amount and status, rerun idempotency, late-arriving
@@ -117,3 +117,4 @@ or cloud deployment by design.
 AI tools were used as a build assistant; the implementation was run, tested and inspected locally
 by the candidate, who is responsible for the design and its limitations.
 '@ | Set-Content -Path README.md -Encoding utf8
+
