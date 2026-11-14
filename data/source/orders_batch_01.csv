@@ -1,0 +1,12 @@
+op,order_id,customer_id,amount,status,updated_at
+upsert,O1001,C001,250.00,new,2026-11-01T09:00:00Z
+upsert,O1002,C002,120.50,paid,2026-11-01T09:15:00Z
+upsert,O1003,C003,89.99,new,2026-11-01T09:30:00Z
+upsert,O1001,C001,250.00,paid,2026-11-01T10:00:00Z
+upsert,O1004,C009,44.00,new,2026-11-01T10:10:00Z
+upsert,O1005,C001,10.00,pending,2026-11-01T10:20:00Z
+upsert,O1006,C002,-5.00,new,2026-11-01T10:30:00Z
+upsert,O1007,C002,70.00,shipped,not-a-timestamp
+upsert,O1008,,55.00,new,2026-11-01T10:40:00Z
+upsert,O1009,C003,12.00,new,2026-11-01T10:50:00Z,EXTRA
+upsert,O1002,C002,120.50,paid,2026-11-01T09:60:00Z

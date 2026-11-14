@@ -1,0 +1,6 @@
+op,order_id,customer_id,amount,status,updated_at
+upsert,O2001,C001,500.00,new,2026-11-03T08:00:00Z
+upsert,O2002,C002,150.00,new,2026-11-03T08:05:00Z
+delete,O1002,C002,,cancelled,2026-11-03T08:10:00Z
+upsert,O2003,C003,75.00,paid,2026-11-03T08:15:00Z
+delete,O1001,C001,,cancelled,2026-11-03T08:20:00Z

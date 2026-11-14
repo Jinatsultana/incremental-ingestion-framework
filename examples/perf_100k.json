@@ -1,0 +1,26 @@
+{
+  "run_id": "90d5d91880e1f649",
+  "source_name": "orders_feed",
+  "source_file": "orders_generated.csv",
+  "status": "success",
+  "started_at": "2026-11-14T09:43:00Z",
+  "ended_at": "2026-11-14T09:43:08Z",
+  "watermark_before": "2026-11-03T08:20:00Z",
+  "watermark_after": "2026-11-03T08:20:00Z",
+  "duration_ms": 7927.005,
+  "failure_reason": null,
+  "rejects_by_reason": {
+    "delete_unknown_key": 2164,
+    "invalid_amount": 1838,
+    "missing_required_field": 982,
+    "invalid_timestamp": 1967,
+    "invalid_reference_key": 1061,
+    "invalid_status": 976
+  },
+  "input_rows": 100100,
+  "applied_rows": 85121,
+  "deleted_rows": 2386,
+  "late_rows": 93276,
+  "stale_skipped_rows": 3605,
+  "rejected_rows": 8988
+}

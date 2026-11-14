@@ -1,0 +1,19 @@
+{
+  "run_id": "47a1817a77295186",
+  "source_name": "orders_feed",
+  "source_file": "orders_batch_03.csv",
+  "status": "success",
+  "started_at": "2026-11-14T09:24:41Z",
+  "ended_at": "2026-11-14T09:24:41Z",
+  "watermark_before": "2026-11-01T10:00:00Z",
+  "watermark_after": "2026-11-03T08:20:00Z",
+  "duration_ms": 4.361,
+  "failure_reason": null,
+  "rejects_by_reason": {},
+  "input_rows": 5,
+  "applied_rows": 3,
+  "deleted_rows": 2,
+  "late_rows": 0,
+  "stale_skipped_rows": 0,
+  "rejected_rows": 0
+}

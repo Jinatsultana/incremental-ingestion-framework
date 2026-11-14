@@ -1,0 +1,8 @@
+op,order_id,customer_id,amount,status,updated_at
+upsert,O1002,C002,120.50,shipped,2026-11-02T08:00:00Z
+upsert,O1001,C001,250.00,shipped,2026-11-01T09:30:00Z
+delete,O1003,C003,,cancelled,2026-11-02T09:00:00Z
+delete,O9999,C001,,cancelled,2026-11-02T09:10:00Z
+upsert,O1010,C003,300.00,new,2026-11-02T09:20:00Z
+upsert,O1004,C002,44.00,paid,2026-11-02T09:30:00Z
+upsert,O1001,C001,250.00,cancelled,2026-11-02T09:40:00Z
